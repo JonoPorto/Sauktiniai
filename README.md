@@ -18,6 +18,16 @@ Iš esmės viskas vyksta su viena lenta. Pirminiais nu'scrape'intais duomenimis 
 
 **queue - šauktinio eilės numeris**
 
+**city - miestas**
+
+| name       | year | id         |  note                                                                        | queue | city      |
+|------------|------|------------|------------------------------------------------------------------------------|-------|-----------|
+| P. GIKA    | 2001 | 5309020102 | iki 2023-02-01 privalote susisiekti ir pateikti savo duomenis Utenos KPKP    | 1     | Panevezys |
+| S. GILYS   | 2001 | 7111095691 | iki 2023-01-23 privalote susisiekti ir pateikti savo duomenis Panevėžio KPKP | 2     | Panevezys |
+| R. LEGAVEC | 2003 | 5227881844 | privalote skubiai susisiekti arba atvykti į Panevėžio KPKP                   | 3     | Panevezys |
+
+
+
 Pirmas žingsnis - apjungti atskirų miestų lentas į vieną:
 ```sql
 CREATE TABLE Lithuania AS
