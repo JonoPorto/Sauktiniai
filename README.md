@@ -44,7 +44,7 @@ UNION
 SELECT * FROM Siauliai;
 ```
 Sukūriau šaukinius šauktiniui stulpelyje **call**
-Šaukiniai yra šauktinių pavardės, kurių galūnės pakeistos į kreipinius. Pavyzdžiui.:
+Šaukiniai yra šauktinių pavardės, kurių galūnės pakeistos į kreipinius. Pavyzdžiui:
 
 Ambrazeviči**us** - Ambrazevič**iau**
 
