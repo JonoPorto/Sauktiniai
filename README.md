@@ -4,7 +4,7 @@
 
 
 Sveiki, čia mano darbas su LK šauktinių sąrašu.
-Darbo tisklas - apdoroti turimus duomenis, pasižiūrėti kurie šauktiniai tarnaus, sukurti tariamus elektroninius laiškus.
+Darbo tikslas - apdoroti turimus duomenis, pasižiūrėti kurie šauktiniai tarnaus, sukurti tariamus elektroninius laiškus.
 
 Iš esmės viskas vyksta su viena lenta. Pirminiais nu'scrape'intais duomenimis turiu 6 lentas su Lietuvos didžiausiais miestais. Kiekviena lenta turi stulpelius:
 
@@ -68,7 +68,7 @@ END;
 
 Kitas žingsnis - išskirstyti šauktinius pagal jų šansus tarnauti. Žinome, kad Lietuvoje privalomąją karo prievolę 2023 m. atliks 3828 šauktiniai.
 
-Žinoti šautkinių skaičių kiekviename mieste būtina, kad galėtume numatyti kiek proporcingai kiekviename mieste šauktinių turės tarnauti. Kiekvienas iš 6 miestų šaukia skirtingą šauktinių skaičių. Išsi'select'inti tuos skaičius galime šitaip:
+Žinoti šauktinių skaičių kiekviename mieste būtina, kad galėtume numatyti kiek proporcingai kiekviename mieste šauktinių turės tarnauti. Kiekvienas iš 6 miestų šaukia skirtingą šauktinių skaičių. Išsi'select'inti tuos skaičius galime šitaip:
 ```sql
 SELECT city, COUNT(id) AS total
 FROM Lithuania
@@ -88,13 +88,13 @@ Nustatydami ar šauktinis tarnaus vadovaujamės jo eilės numeriu **queue** ir �
 ```sql
 SELECT total FROM total_per_city WHERE city = 'Vilnius') * 3828 / (SELECT SUM(total) FROM total_per_city)
 ```
-Kadangi nėra pateikiama informacijos kiek pašauktų jaunuolių yra netinkami tarnybai atlikti ar jos vengia, žiūrėdamas į praejusuių metų skaičius laikausi prielaidos, 
-kad 20% tarnybos neatliks, net jei turėtų. Tai darau, nes šauktiniai esantys šiek tiek aukščiau sąraše (virš eilės numerio kvietimui) vistiek gali tarnauti.
+Kadangi nėra pateikiama informacijos kiek pašauktų jaunuolių yra netinkami tarnybai atlikti ar jos vengia, žiūrėdamas į praėjusių metų skaičius laikausi prielaidos, 
+kad 20% tarnybos neatliks, net jei turėtų. Tai darau, nes šauktiniai esantys šiek tiek aukščiau sąraše (virš eilės numerio kvietimui) vis tiek gali tarnauti.
 
 Galiausiai priskiriu indikatorių prie kiekvieno šauktinio.
 
 1 - šauktinis tarnaus
-2 - šauktinis galimia tarnaus (20% virš eilės numerio)
+2 - šauktinis galimai tarnaus (20% virš eilės numerio)
 3- Šauktiniui tarnauti nereikės
 
 ```sql
@@ -200,7 +200,7 @@ conn.close()
 ```
 
 
-Dabar mūsų duomeys atrodys šitaip: 
+Dabar mūsų duomenys atrodys šitaip: 
 
 | id         | email                         |
 |------------|-------------------------------|
