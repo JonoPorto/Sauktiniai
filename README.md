@@ -159,3 +159,84 @@ END;
 | A. ABROMAS    | 2000 | 8731044614 | iki 2023-01-18 08:00 privalote susisiekti ir pateikti savo duomenis Klaipėdos KPKP | 169   | Klaipeda | A. ABROMAI    | 1     |
 | A. ABRUNHEIRO | 2004 | 2598131860 | šaukimo procedūros vykdomos, sekite nurodymus                                      | 5017  | Vilnius  | A. ABRUNHEIRO | 0     |
 | A. ABRUTIS    | 2003 | 2133352978 | privalote skubiai susisiekti arba atvykti į Kauno KPKP                             | 1373  | Kaunas   | A. ABRUTI     | 2     |
+
+
+Dabar sukurkime numanomų el. paštų lentą, kurios PK bus šauktinio ID, o **email** stulpelį sudarys šauktinio el. paštas sudarytas iš **name** ir priedo @gmail.com
+
+```sql
+CREATE TABLE email_list AS
+SELECT id, LOWER(name) || '@gmail.com' AS email
+FROM Lithuania;
+```
+Mūsų rezultatas:
+| id         | email                         |
+|------------|-------------------------------|
+| 4522061282 | a. aleksa@gmail.com           |
+| 8098941352 | a. aleksandraviČius@gmail.com |
+| 2046721099 | a. aleksandraviČius@gmail.com |
+
+SQLite **LOWER** funkcija veikia tik su ASCII koduote, tačiau lietuviškos raidės yra koduojamos UTF-8.
+Tai galime išspręsti su python kodu:
+```python
+import sqlite3
+
+
+conn = sqlite3.connect('database.db')
+c = conn.cursor()
+
+c.execute("SELECT id, email FROM email_list")
+
+changed_emails = []
+
+for row in c.fetchall():
+    email_id = row[0]
+    email = row[1]
+    email_lower = email.lower().encode('utf-8').decode('utf-8')
+    if email != email_lower:
+        c.execute("UPDATE email_list SET email = ? WHERE id = ?", (email_lower, email_id))
+        changed_emails.append(email_lower)
+conn.commit()
+conn.close()
+```
+
+
+Dabar mūsų duomeys atrodys šitaip: 
+
+| id         | email                         |
+|------------|-------------------------------|
+| 4522061282 | a. aleksa@gmail.com           |
+| 8098941352 | a. aleksandravičius@gmail.com |
+| 2046721099 | a. aleksandravičius@gmail.com |
+
+Galiausiai suformuojame tekstą elektroniniam laiškui siųsti:
+
+```python
+import sqlite3
+
+conn = sqlite3.connect('database.db')
+c = conn.cursor()
+
+c.execute("SELECT Lithuania.id, serve, email, [call], [note] FROM Lithuania, email_list WHERE Lithuania.id = email_list.id")
+
+id_input = input("Enter an id: ")
+
+found_row = False
+for row in c.fetchall():
+    if str(row[0]) == id_input:
+        found_row = True
+        serve = row[1]
+        if serve == 1:
+            print(f"{row[3]}, turite atlikti privalomaja karo tarnyba. {row[4]}")
+        elif serve == 2:
+            print(f"{row[3]}, gali tekti atlikti privalomaja karo tarnyba, laukite tolimesniu nurodymu. {row[4]}")
+        elif serve == 0:
+            pass
+        else:
+            print(f"Error: serve value {serve} is not valid for id {id_input}")
+        break
+
+if not found_row:
+    print(f"Error: id {id_input} not found.")
+
+conn.close()
+```
