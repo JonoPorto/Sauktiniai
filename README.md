@@ -171,9 +171,9 @@ FROM Lithuania;
 Mūsų rezultatas:
 | id         | email                         |
 |------------|-------------------------------|
-| 4522061282 | a. aleksa@gmail.com           |
-| 8098941352 | a. aleksandraviČius@gmail.com |
-| 2046721099 | a. aleksandraviČius@gmail.com |
+| 4522061282 | a. aleksa@&#65279;gmail.com           |
+| 8098941352 | a. aleksandraviČius@&#65279;gmail.com |
+| 2046721099 | a. aleksandraviČius@&#65279;gmail.com |
 
 SQLite **LOWER** funkcija veikia tik su ASCII koduote, tačiau lietuviškos raidės yra koduojamos UTF-8.
 Tai galime išspręsti su python kodu:
@@ -204,9 +204,9 @@ Dabar mūsų duomenys atrodys šitaip:
 
 | id         | email                         |
 |------------|-------------------------------|
-| 4522061282 | a. aleksa@gmail.com           |
-| 8098941352 | a. aleksandravičius@gmail.com |
-| 2046721099 | a. aleksandravičius@gmail.com |
+| 4522061282 | a. aleksa@&#65279;gmail.com           |
+| 8098941352 | a. aleksandravičius@&#65279;gmail.com |
+| 2046721099 | a. aleksandravičius@&#65279;gmail.com |
 
 Galiausiai suformuojame tekstą elektroniniam laiškui siųsti:
 
