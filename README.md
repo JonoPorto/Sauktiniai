@@ -1,5 +1,3 @@
-# Etex
-
 ## DISCLAIMER Čia naudojami Lietuvos kariuomenės pateikti duomenys - šauktinių sąrašas. Šie duomenys yra vieši ir visiems laisvai prieinami.
 
 
